@@ -35,15 +35,15 @@ private DataSource dataSource;
         }else System.out.println("Employee save failed with name= "+ user.getFullName());
 	}
 	
-	@SuppressWarnings("unchecked")
 	public boolean checkIfExists(String userName, String password)
 	{
 		String sql = "SELECT * FROM UReg WHERE emailId = ?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);	
-		User myUser = (User) jdbcTemplate.queryForObject(sql, new Object[] { userName }, new UserRowMapper());
-		if(myUser.getEncryptedPassword().equals(EncryptWithMD5.cryptWithMD5(password)))
+		List<User> myUsers = jdbcTemplate.query(sql, new Object[] { userName }, new UserRowMapper());
+		System.out.println(myUsers.size());
+		if(myUsers.size()!=0 && myUsers.get(0).getEncryptedPassword().equals(EncryptWithMD5.cryptWithMD5(password)))
 		{
-			System.out.println("Successfull..Yayy..!!" + myUser.getEmailId());
+			System.out.println("Successfull..Yayy..!!" + myUsers.get(0).getEmailId());
 			return true;
 		}
 		else
