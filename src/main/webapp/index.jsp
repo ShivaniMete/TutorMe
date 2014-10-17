@@ -6,7 +6,8 @@ pageEncoding="ISO-8859-1"%>
 <body>
 <h2>Hello World</h2>
 		<h3>
-			<a href="home">Click Here</a>
+			<a href="login">Click Here to Login to you account</a>
 		</h3>		
 </body>
 </html>
+

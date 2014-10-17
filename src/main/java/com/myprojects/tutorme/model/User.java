@@ -41,11 +41,14 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 	
-	public String getPassword(){
+	public String getEncryptedPassword(){
 		return password;
 	}
 	public void setEncryptedPassword(String password){
 		this.password = EncryptWithMD5.cryptWithMD5(password);
+	}
+	public void setPassword(String password){
+		this.password = password;
 	}
 
 
