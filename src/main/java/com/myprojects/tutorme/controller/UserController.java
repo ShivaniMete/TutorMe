@@ -27,12 +27,15 @@ public class UserController {
 	@RequestMapping("/save")
 	public ModelAndView save(@ModelAttribute User user)
 	{
+		System.out.println("Saving " + user.getEmailId());
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
 		UserDAO userDAO = ctx.getBean("userDAO", UserDAO.class);
 		//UserDAO userDAO = new UserDAO();		
 		userDAO.save(user);
 		SendEmail.sendTo(user.getEmailId());
-		return login();
+		//return login();
+		ModelAndView mv = new ModelAndView("index");
+		return mv;	
 	}
 	
 	@RequestMapping("/login")
