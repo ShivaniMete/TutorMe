@@ -4,7 +4,7 @@
 <title> Tag Example</title>
 </head>
 <body>
-<!-- <c:redirect url="/"/> -->
+<c:redirect url="/"/>
 Redirecting...
 </body>
 </html>
