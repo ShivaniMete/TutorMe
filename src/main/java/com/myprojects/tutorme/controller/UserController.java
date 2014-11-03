@@ -1,6 +1,7 @@
 package com.myprojects.tutorme.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -88,5 +89,14 @@ public class UserController {
 		}
 		
 	}
-	
+
+	@RequestMapping("/logout")
+	public ModelAndView logout(HttpServletRequest request){
+		System.out.println("In logout");
+		HttpSession session = request.getSession();
+		session.invalidate();
+		//System.out.println(session.getAttribute("currName"));
+		ModelAndView mv = new ModelAndView("RedirectToHome");
+		return mv;
+	}
 }
