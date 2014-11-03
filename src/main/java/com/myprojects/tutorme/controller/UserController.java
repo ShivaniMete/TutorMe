@@ -20,7 +20,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class UserController {
 	
 	@RequestMapping("/register")
-	public ModelAndView showRegistration()
+	public ModelAndView showAddCourse()
 	{
 		//System.out.println(user.getFirstName());
 		ModelAndView ind = new ModelAndView("registration");

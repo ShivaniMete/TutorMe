@@ -15,8 +15,8 @@
 <body>
 <div class="container">
 
-      <form class="form-signin" method="post" action="save" modelAttribute ="userEntity" role="form">
-      <h2 class="form-signin-heading">Please sign up</h2>
+      <form class="form-signin" method="post" action="saveCourse" modelAttribute ="userEntity" role="form">
+      <h2 class="form-signin-heading">Add a Course:</h2>
             <div class="form-group">
               <input type="text" name= "courseId" placeholder="Course ID" class="form-control">
             </div>
