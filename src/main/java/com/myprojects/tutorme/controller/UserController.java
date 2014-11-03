@@ -61,6 +61,7 @@ public class UserController {
 		{
 			System.out.println("Success");
 			session.setAttribute("currName", currentUser.getFirstName());
+			//session.invalidate();
 			System.out.println(session.getAttribute("currName"));
 			ModelAndView mv = new ModelAndView("homepage");
 			return mv;

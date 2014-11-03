@@ -18,6 +18,7 @@ public class UserRowMapper implements RowMapper<User>{
 		dbUser.setLastName(resultSet.getString(3));
 		dbUser.setPhoneNumber(resultSet.getString(4));
 		dbUser.setPassword(resultSet.getString(5));
+		dbUser.setRole(resultSet.getString(6));
 		//System.out.println("Counter is: " + count);
 		return dbUser;	
 	}

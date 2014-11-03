@@ -8,6 +8,7 @@ public class User {
 	private String lName;
 	private String phoneNumber;
 	private String password;
+	private String role;
 	
 	public String getEmailId(){
 		return emailId;
@@ -37,6 +38,10 @@ public class User {
 	public String getPhoneNumber(){
 		return phoneNumber;
 	}
+	
+	public String getRole(){
+		return role;
+	}
 	public void setPhoneNumber(String phoneNumber){
 		this.phoneNumber = phoneNumber;
 	}
@@ -50,6 +55,7 @@ public class User {
 	public void setPassword(String password){
 		this.password = password;
 	}
-
-
+	public void setRole(String role){
+		this.role = role;
+	}
 }
