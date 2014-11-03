@@ -17,7 +17,7 @@ import com.myprojects.tutorme.services.SendEmail;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 @Controller
-public class UserController {
+public class courseController {
 	
 	@RequestMapping("/register")
 	public ModelAndView showRegistration()

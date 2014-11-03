@@ -14,7 +14,11 @@ public class UserRowMapper implements RowMapper<User>{
 		// TODO Auto-generated method stub			
 		User dbUser = new User();
 		dbUser.setEmailId(resultSet.getString(1));
+		dbUser.setFirstName(resultSet.getString(2));
+		dbUser.setLastName(resultSet.getString(3));
+		dbUser.setPhoneNumber(resultSet.getString(4));
 		dbUser.setPassword(resultSet.getString(5));
+		dbUser.setRole(resultSet.getString(6));
 		//System.out.println("Counter is: " + count);
 		return dbUser;	
 	}

@@ -6,6 +6,10 @@
     <bean id="userDAO" class="com.myprojects.tutorme.dao.UserDAO">
         <property name="dataSource" ref="dataSource" />
     </bean>
+    
+    <bean id="courseDAO" class="com.myprojects.tutorme.dao.courseDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
      
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />

@@ -8,10 +8,10 @@ public class User {
 	private String lName;
 	private String phoneNumber;
 	private String password;
+	private String role;
 	
 	//add Role field
-	
-	private String role;
+
 	
 	public String getEmailId(){
 		return emailId;
@@ -41,6 +41,7 @@ public class User {
 	public String getPhoneNumber(){
 		return phoneNumber;
 	}
+	
 	public void setPhoneNumber(String phoneNumber){
 		this.phoneNumber = phoneNumber;
 	}

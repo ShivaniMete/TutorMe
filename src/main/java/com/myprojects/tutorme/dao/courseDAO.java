@@ -1,40 +1,29 @@
 package com.myprojects.tutorme.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import javax.sql.DataSource;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.myprojects.tutorme.model.User;
-import com.myprojects.tutorme.model.EncryptWithMD5;
+import com.myprojects.tutorme.model.Course;
 
-public class UserDAO {
+
+public class courseDAO {
 private DataSource dataSource;
 	
 	public void setDataSource(DataSource dataSource){
 		this.dataSource = dataSource;
 	}
-	public void save(User user){
-		String query = "insert into UReg (emailId, fName,lName,phoneNumber,password) values (?,?,?,?,?)";
+	public void save(Course course){
+		String query = "insert into courses (courseId, courseName, courseCategory) values (?,?,?)";
         
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
          
-        Object[] args = new Object[] {user.getEmailId(), user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getEncryptedPassword()};
+        Object[] args = new Object[] {course.getCourseId(), course.getCourseName(), course.getCourseCategory()};
          
         int out = jdbcTemplate.update(query, args);
          
-        if(out !=0){
-            System.out.println("Employee saved with name= "+ user.getFullName());
-        }else System.out.println("Employee save failed with name= "+ user.getFullName());
 	}
-	
+	/*
 	public User checkIfExists(String userName, String password)
 	{
 		String sql = "SELECT * FROM UReg WHERE emailId = ?";
@@ -49,4 +38,5 @@ private DataSource dataSource;
 		else
 			return null;
 	}
+	*/
 }
