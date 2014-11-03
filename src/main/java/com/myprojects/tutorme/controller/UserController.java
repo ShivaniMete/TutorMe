@@ -60,9 +60,10 @@ public class UserController {
 		if(currentUser != null)
 		{
 			System.out.println("Success");
-			session.setAttribute("currName", currentUser.getFirstName());
-			//session.invalidate();
-			System.out.println(session.getAttribute("currName"));
+			session.setAttribute("currentUser", currentUser);
+			User currUser = (User)session.getAttribute("currentUser");
+			session.setAttribute("currName", currentUser.getFirstName());		
+			System.out.println(currUser.getEmailId() + "From session");
 			ModelAndView mv = new ModelAndView("homepage");
 			return mv;
 		}
