@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
@@ -76,7 +77,7 @@
     </div>
       <!-- <h2>For Students</h2>
 		<h3>
-			<a href="login">Click Here to Login to you account</a>
+			<a href="login">Click Here to Login to your account</a>
 		</h3>-->		
 </body>
 </html>
