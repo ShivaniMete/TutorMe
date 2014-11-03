@@ -9,6 +9,10 @@ public class User {
 	private String phoneNumber;
 	private String password;
 	
+	//add Role field
+	
+	private String role;
+	
 	public String getEmailId(){
 		return emailId;
 	}	
@@ -51,5 +55,13 @@ public class User {
 		this.password = password;
 	}
 
-
+	//add getters and setters for role field
+	
+	public String getRole(){
+		return role;
+	}
+	
+	public void setRole(String role){
+		this.role = role;
+	}
 }

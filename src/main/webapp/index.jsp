@@ -77,7 +77,7 @@
     </div>
       <!-- <h2>For Students</h2>
 		<h3>
-			<a href="login">Click Here to Login to you account</a>
+			<a href="login">Click Here to Login to your account</a>
 		</h3>-->		
 </body>
 </html>
