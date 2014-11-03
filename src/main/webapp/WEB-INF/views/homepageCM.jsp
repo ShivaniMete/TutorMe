@@ -31,7 +31,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="addCourse">Courses</a></li>
+              <li><a href="listCourses">Courses</a></li>
               <li><a href="#">Certificates</a></li>             
             </ul>
             <ul class="nav navbar-nav navbar-right">

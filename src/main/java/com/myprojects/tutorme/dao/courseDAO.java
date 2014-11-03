@@ -1,5 +1,7 @@
 package com.myprojects.tutorme.dao;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,8 +22,27 @@ private DataSource dataSource;
          
         Object[] args = new Object[] {course.getCourseId(), course.getCourseName(), course.getCourseCategory()};
          
-        int out = jdbcTemplate.update(query, args);
-         
+        int out = jdbcTemplate.update(query, args);         
 	}
+	
+	public List<Course> getAllCourses(){
+		String query = "Select * from courses";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        List<Course> courses = jdbcTemplate.query(query, new CourseRowMapper());
+        System.out.println(courses.size() + "Courses");
+        return courses;
+	}
+	
+	public void deleteById(String courseId) {
+		String query = "delete from courses where courseId=?";
+        
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+         
+        Object[] args = new Object[] {courseId};
+         
+        int out = jdbcTemplate.update(query, args);
+        System.out.println(out + "deleted");
+	}
+	
 	
 }
