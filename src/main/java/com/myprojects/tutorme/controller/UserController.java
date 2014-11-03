@@ -58,14 +58,28 @@ public class UserController {
 		UserDAO userDAO = ctx.getBean("userDAO", UserDAO.class);
 		User currentUser = userDAO.checkIfExists(user.getEmailId(), user.getEncryptedPassword());
 		if(currentUser != null)
-		{
+		{ 
 			System.out.println("Success");
 			session.setAttribute("currentUser", currentUser);
-			User currUser = (User)session.getAttribute("currentUser");
-			session.setAttribute("currName", currentUser.getFirstName());		
-			System.out.println(currUser.getEmailId() + "From session");
-			ModelAndView mv = new ModelAndView("homepage");
-			return mv;
+			//User currUser = (User)session.getAttribute("currentUser");
+			session.setAttribute("currName", currentUser.getFirstName());
+			//session.setAttribute("currRole", currentUser.getRole());
+			if(currentUser.getRole().equals("student")){
+				System.out.println("Student role");
+				ModelAndView mv = new ModelAndView("homepageStudent");
+				return mv;
+			}
+			else if(currentUser.getRole().equals("content manager")){
+				System.out.println("CM role");
+				ModelAndView mv = new ModelAndView("homepageCM");
+				return mv;
+			}
+			else {
+				System.out.println("Admin role");
+				ModelAndView mv = new ModelAndView("homepageCM");
+				return mv;
+			}
+			//System.out.println("From session: " + session.getAttribute("currRole"));		
 		}
 		else
 		{

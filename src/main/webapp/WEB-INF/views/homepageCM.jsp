@@ -55,7 +55,4 @@
 
     </div> <!-- /container -->
     </body>
-<h2> Welcome <c:out value="${currName}" /> to your new home page.You have no registered courses yet...</h2>
-
-</body>
 </html>
