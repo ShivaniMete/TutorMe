@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
@@ -6,12 +5,10 @@
 
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
 </head>
 
 <body>
@@ -67,17 +64,11 @@
           <h2>Certificates</h2>
           <p>Best of all! Receive a verified university level certification for all the completed courses.</p>          
         </div>
-     </div>
-      
+     </div>      
       <hr>
-
       <footer>
         <p>&copy;Tutor Me 2014</p>
       </footer>
     </div>
-      <!-- <h2>For Students</h2>
-		<h3>
-			<a href="login">Click Here to Login to your account</a>
-		</h3>-->		
 </body>
 </html>

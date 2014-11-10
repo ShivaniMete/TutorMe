@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 
 public class SendEmail {
 	
-	public static void sendTo(String uName)//, String passCode)
+	public static void sendTo(String uName, int acId)//, String passCode)
 	{
 		Properties properties = new Properties();
 		properties.put("mail.smtp.auth", "true");
@@ -30,9 +30,11 @@ public class SendEmail {
 		String toEmailAddress = clientUName;
 		String subject = "Account Confirmation";
 		String thanks = "Thank you for registering.\n";
-		String loginNameText = "Your Username is: " + clientUName;
+		String loginNameText = "Your Username is: " + clientUName+"\n";
+		String firstUrl = "Click this url for to login and actiavte your account,\nhttp://localhost:8080/tutorme/activateAccount?uid="+clientUName+"&acid=" + acId;
+		String endNote = "\n\nSincerely,\nTutorMe Team";
 		//String passwordText = "\nYour Password is: " + clientPswrd;
-		String textMessage = thanks + loginNameText;// + passwordText;
+		String textMessage = thanks + loginNameText + firstUrl+ endNote;// + passwordText;
 		 
 		Session session = Session.getDefaultInstance(properties, new Authenticator(){
 		protected PasswordAuthentication getPasswordAuthentication(){

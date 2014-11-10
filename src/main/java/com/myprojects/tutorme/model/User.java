@@ -9,7 +9,7 @@ public class User {
 	private String phoneNumber;
 	private String password;
 	private String role;
-	
+	private String activated;
 	//add Role field
 
 	
@@ -64,5 +64,11 @@ public class User {
 	
 	public void setRole(String role){
 		this.role = role;
+	}
+	public String getActivated() {
+		return activated;
+	}
+	public void setActivated(String activated) {
+		this.activated = activated;
 	}
 }

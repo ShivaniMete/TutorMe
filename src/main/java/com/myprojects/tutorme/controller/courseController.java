@@ -70,4 +70,16 @@ public class courseController {
 		courseDAO.deleteById(courseId);
 	    return listCourses();
 	}
+
+	@RequestMapping(value="/viewCourse", method= RequestMethod.GET)
+	public ModelAndView viewCourse(HttpServletRequest request) {
+		String courseId = request.getParameter("id");	
+		ModelAndView mv = new ModelAndView("viewCourse");
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
+		courseDAO courseDAO = ctx.getBean("courseDAO", courseDAO.class);
+		List<CourseContent> allCourseContent = courseDAO.getAllContentForCourse(courseId);
+		mv.addObject("contentList", allCourseContent);
+		System.out.println("inViewCourses" + allCourseContent.size());
+		return mv;
+	}
 }

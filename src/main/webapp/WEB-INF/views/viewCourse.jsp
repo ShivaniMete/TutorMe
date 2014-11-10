@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
@@ -27,9 +26,9 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="/homepageCM">Home</a></li>
-              <li class="active"><a href="listCourses">Courses</a></li>
-              <li><a href="#">Certificates</a></li>             
+              <li><a href="#">Home</a></li>
+              <li><a href="listCourses">Courses</a></li>
+              <li class="active"><a href="viewCourse">Content</a></li>             
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -46,33 +45,30 @@
         </div><!--/.container-fluid -->
       </nav>
 
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">        
-        <a href="addCourse">Add course</a>
+       <div class="jumbotron">        
+        <a href="addCourse">Add content</a>
       </div>
       <table class="table">
     <thead>
         <tr>
-            <th>Course Id</th>
-            <th>Course Name</th>
-            <th>Course Category</th>
+            <th>Content Id</th>
+            <th>Content Title</th>
+            <th>Content Link</th>
         </tr>
     </thead>
     <tbody>
-        <c:forEach var="course" items="${coursesList}">
+        <c:forEach var="courseContent" items="${contentList}">
                 <tr>
-                <td>${course.courseId}</td>
-                    <td><a href="viewCourse?id=${course.courseId}">${course.courseName}</a></td>
-                    <td>${course.courseCategory}</td>
-                    <td>
-                        <a href="deleteCourse?id=${course.courseId}">Delete</a>
-                    </td>
+                <td>${courseContent.contentId}</td>
+                <td>${courseContent.contentTitle}</td>
+                <td><a href ="${courseContent.contentLink}">${courseContent.contentLink}</a></td>
                 </tr>
        </c:forEach>   
     </tbody>
 </table>
 
+
     </div> <!-- /container -->
-</div>
+
 </body>
 </html>

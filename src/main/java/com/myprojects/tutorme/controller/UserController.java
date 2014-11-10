@@ -1,6 +1,8 @@
 package com.myprojects.tutorme.controller;
 
 
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -36,7 +38,7 @@ public class UserController {
 		UserDAO userDAO = ctx.getBean("userDAO", UserDAO.class);
 		//UserDAO userDAO = new UserDAO();		
 		userDAO.save(user);
-		SendEmail.sendTo(user.getEmailId());
+		SendEmail.sendTo(user.getEmailId(), user.getEmailId().hashCode());
 		//return login();
 		ModelAndView mv = new ModelAndView("RedirectToHome");
 		return mv;	
@@ -52,19 +54,22 @@ public class UserController {
 	}
 	
 	@RequestMapping("/checkLogin")
-	public ModelAndView checkLogin(@ModelAttribute User user, HttpSession session)
+	public ModelAndView checkLogin(@ModelAttribute User user, HttpServletRequest request)
 	{
 		System.out.println(user.getEmailId());
+		System.out.println(user.getEmailId().hashCode());//622042148
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
 		UserDAO userDAO = ctx.getBean("userDAO", UserDAO.class);
+		System.out.println(request.getParameter("acid") + " in home Page");
 		User currentUser = userDAO.checkIfExists(user.getEmailId(), user.getEncryptedPassword());
+		//TODO: Check if account is activated. If yes then execute below if block, else get acid from the request
+		//and activate the account.		
 		if(currentUser != null)
 		{ 
 			System.out.println("Success");
+			HttpSession session = request.getSession();
 			session.setAttribute("currentUser", currentUser);
-			//User currUser = (User)session.getAttribute("currentUser");
 			session.setAttribute("currName", currentUser.getFirstName());
-			//session.setAttribute("currRole", currentUser.getRole());
 			if(currentUser.getRole().equals("student")){
 				System.out.println("Student role");
 				ModelAndView mv = new ModelAndView("homepageStudent");
@@ -98,5 +103,16 @@ public class UserController {
 		//System.out.println(session.getAttribute("currName"));
 		ModelAndView mv = new ModelAndView("RedirectToHome");
 		return mv;
+	}
+	
+	@RequestMapping("/activateAccount")
+	public ModelAndView activate(HttpServletRequest request){
+		System.out.println(request.getParameter("acid") + " in activate account Page");
+		System.out.println(request.getParameter("uid") + " in activate account Page");
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
+		UserDAO userDAO = ctx.getBean("userDAO", UserDAO.class);
+		userDAO.activateAccount(request.getParameter("uid"), Integer.parseInt(request.getParameter("acid")));
+		ModelAndView mv = new ModelAndView("RedirectToHome");
+		return mv;		
 	}
 }
