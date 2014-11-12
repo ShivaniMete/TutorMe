@@ -10,8 +10,8 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
-  <body>
-    <div class="container">
+<body>
+ <div class="container">
 
       <!-- Static navbar -->
       <nav class="navbar navbar-default" role="navigation">
@@ -27,8 +27,8 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="homepageStudent?email=${currEmail}">Home</a></li>
-              <li><a href="availableCourses?email=${currEmail}">Available Courses</a></li>
+              <li><a href="homepageStudent?email=${currEmail}">Home</a></li>
+              <li class="active"><a href="availableCourses?email=${currEmail}">Available Courses</a></li>
               <li><a href="#">Certificates</a></li>             
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -47,11 +47,39 @@
       </nav>
 
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">        
-        <p>Welcome to your home page..</p>
-      </div>
-      
+      <table class="table">
+    <thead>
+        <tr>
+            <th>Course Id</th>
+            <th>Course Name</th>
+            <th>Course Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach var="course" items="${availableList}">
+                <tr>
+                <td>${course.courseId}</td>
+                    <td>${course.courseName}</td>
+                    <td>${course.courseCategory}</td>
+                    <td>
+                        <a href="registerForCourse?id=${course.courseId}&userEmail=${currEmail}">Add</a>
+                    </td>
+                </tr>
+       </c:forEach> 
+       <c:forEach var="courses" items="${registeredList}">
+                <tr>
+                <td>${courses.courseId}</td>
+                    <td>${courses.courseName}</td>
+                    <td>${courses.courseCategory}</td>
+                    <td>
+                        <a href="dropCourse?id=${courses.courseId}&userEmail=${currEmail}">Drop</a>
+                    </td>
+                </tr>
+       </c:forEach>  
+    </tbody>
+</table>
 
     </div> <!-- /container -->
-    </body>
+</div>
+</body>
 </html>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,8 +32,19 @@ public class UserController {
 	}
 	
 	@RequestMapping("/save")
-	public ModelAndView save(@ModelAttribute User user)
+	public ModelAndView save(@ModelAttribute User user, BindingResult result)
 	{
+		 if(result.hasErrors()){
+			 ModelAndView model1 = new ModelAndView("registration");
+			 System.out.println("Error saving registration.");
+			 return model1;
+		}
+
+		if(!user.getConfirmPassword().equals(user.getPassword1()))
+		{
+			 ModelAndView model1 = new ModelAndView("registration");
+			 return model1;
+		}
 		System.out.println("Saving " + user.getEmailId());
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
 		UserDAO userDAO = ctx.getBean("userDAO", UserDAO.class);
@@ -69,6 +81,7 @@ public class UserController {
 			System.out.println("Success");
 			HttpSession session = request.getSession();
 			session.setAttribute("currentUser", currentUser);
+			session.setAttribute("currEmail", currentUser.getEmailId());
 			session.setAttribute("currName", currentUser.getFirstName());
 			if(currentUser.getRole().equals("student")){
 				System.out.println("Student role");

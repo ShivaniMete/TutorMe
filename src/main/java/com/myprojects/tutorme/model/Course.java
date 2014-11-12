@@ -4,6 +4,8 @@ public class Course {
 	private String courseId;
 	private String courseName;
 	private String courseCategory;
+	private String managerId;
+	private String released;
 	
 	public String getCourseId(){
 		return courseId;
@@ -22,5 +24,17 @@ public class Course {
 	}
 	public void setCourseCategory(String courseCategory){
 		this.courseCategory = courseCategory;
+	}
+	public String getReleased() {
+		return released;
+	}
+	public void setReleased(String released) {
+		this.released = released;
+	}
+	public String getManagerId() {
+		return managerId;
+	}
+	public void setManagerId(String managerId) {
+		this.managerId = managerId;
 	}
 }

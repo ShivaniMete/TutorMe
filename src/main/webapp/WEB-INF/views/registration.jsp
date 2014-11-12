@@ -18,19 +18,22 @@
       <form class="form-signin" method="post" action="save" modelAttribute ="userEntity" role="form">
       <h2 class="form-signin-heading">Please sign up</h2>
             <div class="form-group">
-              <input type="text" name= "firstName" placeholder="First Name" class="form-control">
+              <input type="text" name= "firstName" placeholder="First Name" class="form-control" required>
             </div>
             <div class="form-group">
-              <input type="text" name= "lastName" placeholder="Last Name" class="form-control">
+              <input type="text" name= "lastName" placeholder="Last Name" class="form-control" required>
             </div>
             <div class="form-group">
-              <input type="text" name= "emailId" placeholder="Email address" class="form-control">
+              <input type="email" name= "emailId" placeholder="Email address" class="form-control" required>
             </div>
             <div class="form-group">
-              <input type="text" name= "phoneNumber" placeholder="Contact number" class="form-control">
+              <input type="text" name= "phoneNumber" placeholder="Contact number" class="form-control" required>
             </div>
             <div class="form-group">
-              <input type="password" name="encryptedPassword" placeholder="Password" class="form-control">
+              <input type="password" name="encryptedPassword" placeholder="Password" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <input type="password" name="confirmPassword" placeholder="Conform Password(must equal password)" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-success" value="Register">Register</button>
           </form>        

@@ -13,16 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myprojects.tutorme.model.*;
-import com.myprojects.tutorme.dao.UserDAO;
 import com.myprojects.tutorme.dao.courseDAO;
 
-
-
-
-
-
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 @Controller
 public class courseController {
 	
@@ -36,28 +30,27 @@ public class courseController {
 	}
 		
 	@RequestMapping("/saveCourse")
-	public ModelAndView saveCourse(@ModelAttribute Course course)
+	public ModelAndView saveCourse(@ModelAttribute Course course, HttpServletRequest request)
 	{
 		System.out.println("Saving Course " + course.getCourseName());
+		String currUser = (String) request.getSession().getAttribute("currEmail");
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
-		courseDAO courseDAO = ctx.getBean("courseDAO", courseDAO.class);
-		//UserDAO userDAO = new UserDAO();		
-		courseDAO.saveCourse(course);
-		//SendEmail.sendTo(user.getEmailId());
-		//return login();
+		courseDAO courseDAO = ctx.getBean("courseDAO", courseDAO.class);	
+		courseDAO.saveCourse(course, currUser);
 		ModelAndView mv = new ModelAndView("homepageCM");
 		return mv;	
 	}
 	
 	@RequestMapping("/listCourses")
-	public ModelAndView listCourses()
+	public ModelAndView listCourses(HttpServletRequest request)
 	{
 		ModelAndView mv = new ModelAndView("listCourses");
+		String currEmailId = (String) request.getSession().getAttribute("currEmail");
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
 		courseDAO courseDAO = ctx.getBean("courseDAO", courseDAO.class);
-		List<Course> allCourses = courseDAO.getAllCourses();
+		List<Course> allCourses = courseDAO.getCoursesForId(currEmailId);
 		mv.addObject("coursesList", allCourses);
-		System.out.println("here" + allCourses.size());		
+		//System.out.println("here" + allCourses.size());		
 		return mv;
 	}
 	
@@ -68,7 +61,7 @@ public class courseController {
 	    ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
 		courseDAO courseDAO = ctx.getBean("courseDAO", courseDAO.class);
 		courseDAO.deleteById(courseId);
-	    return listCourses();
+	    return listCourses(request);
 	}
 
 	@RequestMapping(value="/viewCourse", method= RequestMethod.GET)

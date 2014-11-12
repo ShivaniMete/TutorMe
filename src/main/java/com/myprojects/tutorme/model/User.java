@@ -8,8 +8,10 @@ public class User {
 	private String lName;
 	private String phoneNumber;
 	private String password;
+	private String confirmPassword;
 	private String role;
 	private String activated;
+	private String password1;
 	//add Role field
 
 	
@@ -49,7 +51,12 @@ public class User {
 	public String getEncryptedPassword(){
 		return password;
 	}
+	
+	public String getPassword1() {
+		return password1;
+	}
 	public void setEncryptedPassword(String password){
+		password1 = password;
 		this.password = EncryptWithMD5.cryptWithMD5(password);
 	}
 	public void setPassword(String password){
@@ -70,5 +77,11 @@ public class User {
 	}
 	public void setActivated(String activated) {
 		this.activated = activated;
+	}
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 }

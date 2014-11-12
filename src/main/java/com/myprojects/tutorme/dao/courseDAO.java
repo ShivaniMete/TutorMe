@@ -15,14 +15,22 @@ private DataSource dataSource;
 	public void setDataSource(DataSource dataSource){
 		this.dataSource = dataSource;
 	}
-	public void saveCourse(Course course){
-		String query = "insert into courses (courseId, courseName, courseCategory) values (?,?,?)";
+	public void saveCourse(Course course, String managerId){
+		String query = "insert into courses (courseId, courseName, courseCategory, managerId) values (?,?,?,?)";
         
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
          
-        Object[] args = new Object[] {course.getCourseId(), course.getCourseName(), course.getCourseCategory()};
+        Object[] args = new Object[] {course.getCourseId(), course.getCourseName(), course.getCourseCategory(), managerId};
          
         int out = jdbcTemplate.update(query, args);         
+	}
+	
+	public List<Course> getCoursesForId(String managerId){
+		String query = "Select * from courses where managerId =?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        List<Course> courses = jdbcTemplate.query(query, new Object[] {managerId}, new CourseRowMapper());
+        System.out.println(courses.size() + "Courses");
+        return courses;
 	}
 	
 	public List<Course> getAllCourses(){
