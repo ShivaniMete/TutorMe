@@ -49,26 +49,22 @@
         <a href="addCourse">Add content</a>
       </div>
       <table class="table">
-    <thead>
-        <tr>
-            <th>Content Id</th>
-            <th>Content Title</th>
-            <th>Content Link</th>
-        </tr>
-    </thead>
     <tbody>
         <c:forEach var="courseContent" items="${contentList}">
                 <tr>
-                <td>${courseContent.contentId}</td>
-                <td>${courseContent.contentTitle}</td>
-                <td><a href ="${courseContent.contentLink}">${courseContent.contentLink}</a></td>
+                <!-- <td>${courseContent.contentId}</td>
+                <td>${courseContent.contentTitle}</td> 
+                <td><a href ="${courseContent.contentLink}">${courseContent.contentLink}</a></td>-->
+                <td>
+                <iframe src="${courseContent.contentLink}" style="width:718px; height:350px; margin: 0 auto; display: block"></iframe>
+                </td>
                 </tr>
        </c:forEach>   
+	 
     </tbody>
 </table>
 
 
-    </div> <!-- /container -->
-
+    </div> <!-- /container --><!-- http://docs.google.com/gview?url=  &embedded=true-->  
 </body>
 </html>
