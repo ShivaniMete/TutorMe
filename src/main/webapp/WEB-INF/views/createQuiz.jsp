@@ -1,19 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+function execute(a)
+{
+	console.log("hey there!")
+	console.log(a);
+}
+</script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 <body>
  <div class="container">
-
-      <!-- Static navbar -->
-      <nav class="navbar navbar-default" role="navigation">
+ <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -26,9 +32,9 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="#">Home</a></li>
-              <li><a href="listCourses">Courses</a></li>
-              <li class="active"><a href="viewCourse">Content</a></li>             
+              <li><a href="/homepageCM">Home</a></li>
+              <li class="active"><a href="listCourses">Courses</a></li>
+              <li><a href="#">Certificates</a></li>             
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -45,27 +51,9 @@
         </div><!--/.container-fluid -->
       </nav>
 
-       <div class="jumbotron">        
-        <a href="addCourse">Add content</a>
-        <a href="addQuiz">Add Quiz</a>
-      </div>
-      <table class="table">
-    <tbody>
-        <c:forEach var="courseContent" items="${contentList}">
-                <tr>
-                <!-- <td>${courseContent.contentId}</td>
-                <td>${courseContent.contentTitle}</td> 
-                <td><a href ="${courseContent.contentLink}">${courseContent.contentLink}</a></td>-->
-                <td>
-                <iframe src="${courseContent.contentLink}" style="width:718px; height:350px; margin: 0 auto; display: block"></iframe>
-                </td>
-                </tr>
-       </c:forEach>   
-	 
-    </tbody>
-</table>
-
-
-    </div> <!-- /container --><!-- http://docs.google.com/gview?url=  &embedded=true-->  
+      <!-- Main component for a primary marketing message or call to action -->
+      <input type="text" id="quesCount" />
+      <input name="buttonExecute" onclick="execute(document.getElementById('quesCount').value)" type="button" value="Execute" />
+</div>
 </body>
 </html>

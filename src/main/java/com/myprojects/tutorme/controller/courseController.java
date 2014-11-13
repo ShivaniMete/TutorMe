@@ -41,6 +41,13 @@ public class courseController {
 		return mv;	
 	}
 	
+	@RequestMapping("/addQuiz")
+	public ModelAndView addQuiz(HttpServletRequest request)
+	{
+		ModelAndView mv = new ModelAndView("createQuiz");
+		return mv;
+	}
+	
 	@RequestMapping("/listCourses")
 	public ModelAndView listCourses(HttpServletRequest request)
 	{
