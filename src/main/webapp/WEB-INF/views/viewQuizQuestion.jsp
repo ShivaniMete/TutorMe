@@ -1,17 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
-  <body>
-    <div class="container">
+
+<body>
+<div class="container">
 
       <!-- Static navbar -->
       <nav class="navbar navbar-default" role="navigation">
@@ -27,9 +27,9 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="home">Home</a></li>
-              <li><a href="availableCourses?email=${currEmail}">Available Courses</a></li>
-              <li><a href="#">Certificates</a></li>             
+              <li><a href="#">Home</a></li>
+              <li><a href="listCourses">Courses</a></li>
+              <li class="active"><a href="viewCourse">Content</a></li>             
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -46,32 +46,38 @@
         </div><!--/.container-fluid -->
       </nav>
 
-      <div class="jumbotron" style="padding-top:10px; padding-bottom:10px">        
-        Current courses
-      </div>
+<c:set var="currQuest" value="${currQues}"/>
+<c:set var="totalQuest" value="${totalQuestions}"/>
 
-      <table class="table">
-    <thead>
-        <tr>
-            <th>Course Id</th>
-            <th>Course Name</th>
-            <th>Course Category</th>
-            <th>Grades</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:forEach var="course" items="${coursesList}">
-                <tr>
-                <td>${course.courseId}</td>
-                    <td><a href="viewCourse?id=${course.courseId}">${course.courseName}</a></td>
-                    <td>${course.courseCategory}</td>
-                    <td>${course.grades}%</td>
-                </tr>
-       </c:forEach>   
-    </tbody>
+<c:if test="${currQuest > totalQuest}">
+<a href="submitQuiz?courseId=${courseId}" class="btn btn-success">End Quiz</a>
+</c:if>
+<c:if test="${currQuest <= totalQuest}">
+<form method="post" action="startQuiz?quizId=${quizId}&courseId=${courseId}&questNum=${question.questionNum +1}">
+<table class="table">
+     <tbody class="pull-left">
+	     	<tr>
+	     		 <td>${question.questionNum}. ${question.question}</td>	     		
+	     	</tr>
+	     	<tr>
+	     	    <td style="width:200px">
+	     	    	<input class="radio-inline" type="radio" value="A" name="answer">&nbsp;&nbsp;A. ${question.option1}</td>	
+	     	
+	     	    <td style="width:200px">
+	     			<input class="radio-inline" type="radio" value="B" name="answer">&nbsp;&nbsp;B. ${question.option2}</td>	
+	     	
+	     	    <td style="width:200px">
+	     			<input class="radio-inline" type="radio" value="C" name="answer">&nbsp;&nbsp;C.${question.option3}</td>	
+	     	
+	     	    <td>
+	     			<input class="radio-inline" type="radio" value="D" name="answer">&nbsp;&nbsp;D. ${question.option4}</td>	
+	     	</tr>
+	     	</tbody>
 </table>
-      
+<input type="submit" name="saveResponse" value="Save Response">
+</form>
+</c:if>
+</div> <!-- Container -->
 
-    </div> <!-- /container -->
-    </body>
+</body>
 </html>

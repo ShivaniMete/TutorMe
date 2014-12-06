@@ -6,6 +6,7 @@ public class Course {
 	private String courseCategory;
 	private String managerId;
 	private String released;
+	private String deprecated;
 	
 	public String getCourseId(){
 		return courseId;
@@ -36,5 +37,11 @@ public class Course {
 	}
 	public void setManagerId(String managerId) {
 		this.managerId = managerId;
+	}
+	public String getDeprecated() {
+		return deprecated;
+	}
+	public void setDeprecated(String deprecated) {
+		this.deprecated = deprecated;
 	}
 }

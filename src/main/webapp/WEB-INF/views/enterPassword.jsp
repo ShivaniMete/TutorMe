@@ -10,8 +10,8 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
-  <body>
-    <div class="container">
+<body>
+ <div class="container">
 
       <!-- Static navbar -->
       <nav class="navbar navbar-default" role="navigation">
@@ -26,16 +26,12 @@
             <a class="navbar-brand" href="#">Tutor Me</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="home">Home</a></li>
-              <li><a href="availableCourses?email=${currEmail}">Available Courses</a></li>
-              <li><a href="#">Certificates</a></li>             
+            <ul class="nav navbar-nav">            
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, <c:out value="${currName}"/> <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="changePassword">Change Password</a></li>
                   <li><a href="logout">Logout</a></li>
                   <li class="divider"></li>
                   <li><a href="#">Help</a></li>
@@ -46,32 +42,24 @@
         </div><!--/.container-fluid -->
       </nav>
 
-      <div class="jumbotron" style="padding-top:10px; padding-bottom:10px">        
-        Current courses
-      </div>
+      <!-- Main component for a primary marketing message or call to action -->
+	<div class="container">
 
-      <table class="table">
-    <thead>
-        <tr>
-            <th>Course Id</th>
-            <th>Course Name</th>
-            <th>Course Category</th>
-            <th>Grades</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:forEach var="course" items="${coursesList}">
-                <tr>
-                <td>${course.courseId}</td>
-                    <td><a href="viewCourse?id=${course.courseId}">${course.courseName}</a></td>
-                    <td>${course.courseCategory}</td>
-                    <td>${course.grades}%</td>
-                </tr>
-       </c:forEach>   
-    </tbody>
-</table>
-      
+      <form class="form-signin" method="post" action="savePassword?id=${currEmail}&role=${currRole}" modelAttribute ="passwordEntity" role="form">
+      <h2 class="form-signin-heading">Enter New Password</h2>
+            <div class="form-group">
+              <input type="password" name= "password" placeholder="Password" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <input type="password" name="confirmPassword" placeholder="Confirm Password" class="form-control" required>
+            </div>
+            <div><label>${userMessage}</label></div>
+            <button type="submit" class="btn btn-success" value="Register">Save New Password</button>
+          </form>        
+    </div>
+    <a href="home">Return to Home</a>
 
     </div> <!-- /container -->
-    </body>
+
+</body>
 </html>

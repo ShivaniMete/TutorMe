@@ -10,8 +10,8 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
-  <body>
-    <div class="container">
+<body>
+ <div class="container">
 
       <!-- Static navbar -->
       <nav class="navbar navbar-default" role="navigation">
@@ -26,10 +26,7 @@
             <a class="navbar-brand" href="#">Tutor Me</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="home">Home</a></li>
-              <li><a href="availableCourses?email=${currEmail}">Available Courses</a></li>
-              <li><a href="#">Certificates</a></li>             
+            <ul class="nav navbar-nav">            
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -46,32 +43,61 @@
         </div><!--/.container-fluid -->
       </nav>
 
-      <div class="jumbotron" style="padding-top:10px; padding-bottom:10px">        
-        Current courses
+      <!-- Main component for a primary marketing message or call to action -->
+            <div class="jumbotron">        
+        <p>Students</p>
       </div>
-
       <table class="table">
     <thead>
         <tr>
-            <th>Course Id</th>
-            <th>Course Name</th>
-            <th>Course Category</th>
-            <th>Grades</th>
+            <th>User Id</th>
+            <th>Current Role</th>
+            <th>Change Role To:</th>
         </tr>
     </thead>
     <tbody>
-        <c:forEach var="course" items="${coursesList}">
+         <c:forEach var="student" items="${studentList}">
                 <tr>
-                <td>${course.courseId}</td>
-                    <td><a href="viewCourse?id=${course.courseId}">${course.courseName}</a></td>
-                    <td>${course.courseCategory}</td>
-                    <td>${course.grades}%</td>
+                <td>${student.emailId}</td>
+                    <td>${student.role}</td>
+                    <td>
+                        <a href="switchToCM?id=${student.emailId}">Change To Content Manager</a>
+                    </td>
+                    <td>
+                    	<a href="deleteUser?id=${student.emailId}">Delete</a>
+                    </td>
                 </tr>
-       </c:forEach>   
+       </c:forEach> 
     </tbody>
 </table>
-      
+
+      <div class="jumbotron">        
+        </small><p>Content Managers</p>
+      </div>
+      <table class="table">
+    <thead>
+        <tr>
+            <th>User Id</th>
+            <th>Current Role</th>
+            <th>Change Role To:</th>
+        </tr>
+    </thead>
+          <c:forEach var="cm" items="${cmList}">
+                <tr>
+                <td>${cm.emailId}</td>
+                    <td>${cm.role}</td>
+                    <td>
+                        <a href="switchToStudent?id=${cm.emailId}">Change To Student</a>
+                    </td>
+                    <td>
+                    	<a href="deleteUser?id=${cm.emailId}">Delete</a>
+                    </td>
+                </tr>
+       </c:forEach> 
+    </tbody>
+</table>
 
     </div> <!-- /container -->
-    </body>
+</div>
+</body>
 </html>

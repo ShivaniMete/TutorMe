@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
-  <body>
-    <div class="container">
+<body>
+ <div class="container">
 
       <!-- Static navbar -->
       <nav class="navbar navbar-default" role="navigation">
@@ -27,9 +26,9 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="home">Home</a></li>
-              <li><a href="availableCourses?email=${currEmail}">Available Courses</a></li>
-              <li><a href="#">Certificates</a></li>             
+              <li><a href="#">Home</a></li>
+              <li><a href="listCourses">Courses</a></li>
+              <li class="active"><a href="viewCourse">Content</a></li>             
             </ul>
             <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -46,32 +45,28 @@
         </div><!--/.container-fluid -->
       </nav>
 
-      <div class="jumbotron" style="padding-top:10px; padding-bottom:10px">        
-        Current courses
-      </div>
-
-      <table class="table">
-    <thead>
-        <tr>
-            <th>Course Id</th>
-            <th>Course Name</th>
-            <th>Course Category</th>
-            <th>Grades</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:forEach var="course" items="${coursesList}">
-                <tr>
-                <td>${course.courseId}</td>
-                    <td><a href="viewCourse?id=${course.courseId}">${course.courseName}</a></td>
-                    <td>${course.courseCategory}</td>
-                    <td>${course.grades}%</td>
-                </tr>
-       </c:forEach>   
+     <table class="table">
+    <tbody> 
+       <c:forEach var="question" items = "${questionList}">
+       		<tr>
+       		<td>${question.question}</td>
+       		</tr>
+       		<tr>  			
+       			<td style="width:150px">A. ${question.option1}</td>
+       			<td style="width:150px">B. ${question.option2}</td>
+       			<td style="width:150px">C. ${question.option3}</td>
+       			<td>D. ${question.option4}</td>
+       		</tr>
+      		<tr>
+       			<td>Correct Answer: ${question.answer}</td>
+       		</tr>
+       </c:forEach>
+	 
     </tbody>
 </table>
-      
 
-    </div> <!-- /container -->
-    </body>
+
+
+    </div> <!-- /container --><!-- http://docs.google.com/gview?url=  &embedded=true-->  
+</body>
 </html>

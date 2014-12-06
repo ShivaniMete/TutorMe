@@ -27,7 +27,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="/homepageCM">Home</a></li>
+              <li><a href="home">Home</a></li>
               <li class="active"><a href="listCourses">Courses</a></li>
               <li><a href="#">Certificates</a></li>             
             </ul>
@@ -35,7 +35,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, <c:out value="${currName}"/> <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Account Settings</a></li>
+                  <li><a href="changePassword">Change Password</a></li>
                   <li><a href="logout">Logout</a></li>
                   <li class="divider"></li>
                   <li><a href="#">Help</a></li>
@@ -47,10 +47,17 @@
       </nav>
 
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">        
-        <a href="addCourse">Add course</a>
+      <c:if test="${currRole=='content manager'}"> 
+      <div class="jumbotron" style="padding: 15px;background-color: rgb(116, 109, 109);">        
+        <a href="addCourse"  class="btn btn-success">Add course</a>
+      </div> 
+      </c:if>
+      <c:if test="${currRole=='student'}"> 
+      <div class="jumbotron" style="padding-top:10px; padding-bottom:10px">        
+        Current courses
       </div>
-      <table class="table">
+      </c:if>
+     <table class="table">
     <thead>
         <tr>
             <th>Course Id</th>
@@ -59,16 +66,43 @@
         </tr>
     </thead>
     <tbody>
-        <c:forEach var="course" items="${coursesList}">
+        <c:forEach var="courses2" items="${notReleasedList}">
+                <tr>
+                <td>${courses2.courseId}</td>
+                    <td><a href="viewCourse?id=${courses2.courseId}">${courses2.courseName}</a></td>
+                    <td>${courses2.courseCategory}</td>
+                    <td>
+                    	<a href="releaseCourse?id=${courses2.courseId}">Release</a>
+                    </td>
+                    <td>
+                        <a href="deleteCourse?id=${courses2.courseId}">Delete</a>
+                    </td>
+                </tr>
+       </c:forEach>   
+               <c:forEach var="courses3" items="${releasedList}">
+                <tr>
+                <td>${courses3.courseId}</td>
+                    <td><a href="viewCourse?id=${courses3.courseId}">${courses3.courseName}</a></td>
+                    <td>${courses3.courseCategory}</td>
+                    <td>
+                    	<a href="deprecateCourse?id=${courses3.courseId}">Deprecate</a>
+                    </td>
+                    <td>
+                        <a href="deleteCourse?id=${courses3.courseId}">Delete</a>
+                    </td>
+                </tr>
+       </c:forEach>
+               <c:forEach var="course" items="${deprecatedList}">
                 <tr>
                 <td>${course.courseId}</td>
                     <td><a href="viewCourse?id=${course.courseId}">${course.courseName}</a></td>
                     <td>${course.courseCategory}</td>
+                    <td>Deprecated</td>
                     <td>
                         <a href="deleteCourse?id=${course.courseId}">Delete</a>
                     </td>
                 </tr>
-       </c:forEach>   
+       </c:forEach>
     </tbody>
 </table>
 

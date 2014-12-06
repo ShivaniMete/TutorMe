@@ -27,7 +27,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="homepageStudent?email=${currEmail}">Home</a></li>
+              <li><a href="home">Home</a></li>
               <li class="active"><a href="availableCourses?email=${currEmail}">Available Courses</a></li>
               <li><a href="#">Certificates</a></li>             
             </ul>
@@ -35,7 +35,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, <c:out value="${currName}"/> <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Account Settings</a></li>
+                  <li><a href="changePassword">Change Password</a></li>
                   <li><a href="logout">Logout</a></li>
                   <li class="divider"></li>
                   <li><a href="#">Help</a></li>

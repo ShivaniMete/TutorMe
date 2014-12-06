@@ -1,5 +1,6 @@
 package com.myprojects.tutorme.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -78,6 +80,13 @@ public class StudentRegistrationController {
 		    		registeredCourses.add(element);
 		    		iter.remove();
 		    	}
+		    	else
+		    	{
+		    		if(element.getDeprecated().equals("yes"))
+		    		{
+		    			iter.remove();
+		    		}			
+		    	}
 		    }
 		    else
 		    	iter.remove();
@@ -88,5 +97,33 @@ public class StudentRegistrationController {
 		System.out.println("here" + availableCourses.size());		
 		return mv;
 	}
-
+	@RequestMapping(value = "/submitQuiz") 
+	public ModelAndView submitQuiz(@ModelAttribute QuizQuestion question, HttpServletRequest request){
+		System.out.println("In submitQuiz");
+		String courseId = request.getParameter("courseId");
+		String emailId = request.getSession().getAttribute("currEmail").toString();
+		DecimalFormat df = new DecimalFormat();
+		df.setMaximumFractionDigits(2);
+		String currentScore = df.format(Float.parseFloat(request.getSession().getAttribute("score").toString()));
+		System.out.println(currentScore);
+		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
+		StudentsRegistrationDAO registrationDAO = ctx.getBean("studentsRegistrationDAO", StudentsRegistrationDAO.class);
+		System.out.println(courseId + " " + emailId);
+		StudentRegistration currentRegInfo = registrationDAO.getRegInfo(courseId, emailId);
+		if(Float.parseFloat(currentScore) > Float.parseFloat(currentRegInfo.getGrades()))
+		{
+			System.out.println("Completed: " + currentRegInfo.getCompleted() + "grade: " + currentRegInfo.getGrades());
+			if(currentRegInfo.getCompleted().equals("No"))
+			{
+				registrationDAO.updateGrades(courseId, emailId, currentScore, false);
+			}
+			else
+			{
+				registrationDAO.updateGrades(courseId, emailId, currentScore, true);
+			}
+			
+		}
+		request.getSession().setAttribute("score", 0);
+		return new ModelAndView("redirect:/home");
+	}
 }

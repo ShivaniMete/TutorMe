@@ -64,6 +64,66 @@ private DataSource dataSource;
 		System.out.println("Updated " + out + " students");
 	}
 
+	public User checkIfUserExists(String userName)
+	{
+		String sql = "SELECT * FROM UReg WHERE emailId = ?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);	
+		List<User> myUsers = jdbcTemplate.query(sql, new Object[] { userName }, new UserRowMapper());
+		System.out.println(myUsers.get(0).getActivated());
+		if(myUsers.size()!=0)
+		{
+			System.out.println("Successfull..Yayy..!!" + myUsers.get(0).getFirstName());
+			return myUsers.get(0);
+		}
+		else
+			return null;
+	}
+
+public void changeToCM(String userName)
+	{
+		String query = "UPDATE ureg SET role ='content manager' WHERE emailId=?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		Object[] args = new Object[] {userName};
+		int out = 0;
+		out = jdbcTemplate.update(query, args);
+		System.out.println("Updated " + out + " students");
+	}
+	
+	public void changeToStudent(String userName)
+	{
+		String query = "UPDATE ureg SET role ='student' WHERE emailId=?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		Object[] args = new Object[] {userName};
+		int out = 0;
+		out = jdbcTemplate.update(query, args);
+		System.out.println("Updated " + out + " students");
+	}
+	
+	public List<User> getAllUsers(){
+		String query = "Select * from UReg";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        List<User> users = jdbcTemplate.query(query, new UserRowMapper());
+        System.out.println(users.size() + " Users");
+        return users;
+	}
+	
+	public void changePassword(String password, String id)
+	{
+		String query = "Update UReg SET password=? WHERE emailId=?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		Object[] args = new Object[] {password, id};
+		int out = jdbcTemplate.update(query, args);
+		System.out.println("Updated " + out + " password");
+	}
+	
+	public void deleteUser(String id)
+	{
+		String query = "Delete from UReg where emailId=?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		Object[] args = new Object[] {id};
+		int out = jdbcTemplate.update(query, args);
+		System.out.println("Deleted " + out + "  user");
+	}
 	/*public Boolean isAccountActivated(String userName)
 	{
 		String sql = "SELECT accountActivated FROM UReg WHERE emailId = ?";
